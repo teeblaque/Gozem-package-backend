@@ -15,7 +15,7 @@ const PackageSchema = new Schema({
     to_name: { type: String },
     to_address: { type: String },
     to_location: { lat: Number, lng: Number }
-});
+},{ timestamps: true });
 
 const Package = mongoose.model('Package', PackageSchema);
 module.exports = Package;

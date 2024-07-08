@@ -6,7 +6,7 @@ const PackageService = require('../services/package.service');
 const findAll = async (req,res) => {
     try {
         const packages = await PackageService.getPackages();
-        res.json(packages);
+        res.json({ success: true, data: packages});
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -21,9 +21,9 @@ const findAll = async (req,res) => {
 const findOne = async (req,res) => {
     try {
         const package = await PackageService.getSinglePackage(req.params.id);
-        res.json(package);
+        res.json({ success: true, data: package});
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(500).json({error: error.message});
     }
 };
 
@@ -35,7 +35,7 @@ const findOne = async (req,res) => {
 const store = async (req,res) => {
     try {
         const package = await PackageService.create(req.body);
-        res.status(201).json(package);
+        res.status(201).json({ success: true, data: package});
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -50,7 +50,7 @@ const store = async (req,res) => {
 const update = async (req,res) => {
     try {
         const package = await PackageService.update(req.params.id, req.body);
-        res.json(package);
+        res.status(200).json({ success: true, data: package});
     } catch (error) {
         res.status(400).json({error: error.message});
     }

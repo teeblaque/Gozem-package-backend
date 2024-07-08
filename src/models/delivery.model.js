@@ -9,7 +9,7 @@ const DeliverySchema = new Schema({
     end_time: { type: Date },
     location: { lat: Number, lng: Number },
     status: { type: String, enum: ['open', 'picked-up', 'in-transit', 'delivered', 'failed'] }
-});
+},{ timestamps: true });
 
 const Delivery = mongoose.model('Delivery', DeliverySchema);
 module.exports = Delivery;

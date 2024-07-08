@@ -1,12 +1,12 @@
 const DeliveryService = require('../services/delivery.service');
 
 /**
- * @returns list of packages
+ * @returns list of deliveries
  */
 const findAll = async (req,res) => {
     try {
-        const packages = await DeliveryService.getDelivery();
-        res.json(packages);
+        const deliveries = await DeliveryService.getDelivery();
+        res.json({ success: true, data: deliveries});
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -14,28 +14,28 @@ const findAll = async (req,res) => {
 
 /**
  * @params id as part of header
- * @returns a single package
- * @conditions package with the id
- * @response returns a single package
+ * @returns a single delivery
+ * @conditions delivery with the id
+ * @response returns a single delivery
  */
 const findOne = async (req,res) => {
     try {
-        const package = await DeliveryService.getSingleDelivery(req.params.id);
-        res.json(package);
+        const delivery = await DeliveryService.getSingleDelivery(req.params.id);
+        res.json({ success: true, data: delivery});
     } catch (error) {
         res.status(400).json({error: error.message});
     }
 };
 
 /**
- * @returns created package
+ * @returns created delivery
  * @body request body
- * @response returns created package
+ * @response returns created delivery
  */
 const store = async (req,res) => {
     try {
-        const package = await DeliveryService.create(req.body);
-        res.status(201).json(package);
+        const delivery = await DeliveryService.create(req.body);
+        res.status(201).json({ success: true, data: delivery});
     } catch (error) {
         res.status(400).json({error: error.message});
     }
