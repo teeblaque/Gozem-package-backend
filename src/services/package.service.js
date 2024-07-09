@@ -8,7 +8,7 @@ const getPackages = async () => {
 
 const getSinglePackage = async (id) => {
   try {
-    const package = await Package.findById(id);
+    const package = await Package.findOne({ package_id: id });
     if (!package) {
       throw new Error("Package not found");
     }

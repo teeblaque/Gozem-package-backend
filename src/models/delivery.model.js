@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const DeliverySchema = new Schema({
     delivery_id: { type: String, required: true, unique: true },
-    package_id: { type: String, required: true },
+    package_id: { type: String, required: true,  },
     pickup_time: { type: Date },
     start_time: { type: Date },
     end_time: { type: Date },

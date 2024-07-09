@@ -1,12 +1,11 @@
 const DeliveryService = require('../services/delivery.service');
-
 /**
  * @returns list of deliveries
  */
 const findAll = async (req,res) => {
     try {
-        const deliveries = await DeliveryService.getDelivery();
-        res.json({ success: true, data: deliveries});
+        const deliveries = await DeliveryService.getDelivery(parseInt(req.query.page ?? 1), parseInt(req.query.limit ?? 10));
+        res.json(deliveries);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -21,7 +20,7 @@ const findAll = async (req,res) => {
 const findOne = async (req,res) => {
     try {
         const delivery = await DeliveryService.getSingleDelivery(req.params.id);
-        res.json({ success: true, data: delivery});
+        res.json(delivery);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -35,7 +34,7 @@ const findOne = async (req,res) => {
 const store = async (req,res) => {
     try {
         const delivery = await DeliveryService.create(req.body);
-        res.status(201).json({ success: true, data: delivery});
+        res.status(201).json(delivery);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -49,8 +48,8 @@ const store = async (req,res) => {
  */
 const update = async (req,res) => {
     try {
-        const package = await DeliveryService.update(req.params.id, req.body);
-        res.json(package);
+        const delivery = await DeliveryService.update(req.params.id, req.body);
+        res.json(delivery);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -64,8 +63,8 @@ const update = async (req,res) => {
  */
 const deleteDelivery = async (req,res) => {
     try {
-        const package = await DeliveryService.deleteDelivery(req.params.id);
-        res.json(package);
+        const delivery = await DeliveryService.deleteDelivery(req.params.id);
+        res.json(delivery);
     } catch (error) {
         res.status(204).json({error: error.message});
     }
